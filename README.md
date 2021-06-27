@@ -1,1 +1,1 @@
-# game_marathon_jam
+# Marathon Game Jam - r/solodevelopment
