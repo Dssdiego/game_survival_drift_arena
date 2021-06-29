@@ -9,12 +9,17 @@
 class Window
 {
 public:
+    Window();
+
+
+public:
     bool createWindow();
 
 //    SDL_Window& getWindow();
 
 private:
     SDL_Window* mWindow;
+    SDL_GLContext mContext;
 };
 
 

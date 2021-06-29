@@ -11,7 +11,9 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
 # OpenGL
+#if(APPLE)
 find_package(OpenGL REQUIRED)
+#endif()
 
 # Include directories
 include_directories(
@@ -34,7 +36,7 @@ add_executable(
         ${PROJECT_NAME}
         ${CPP_HEADERS}
         ${CPP_SOURCES}
-)
+        )
 
 message(SDL2_LIBRARY: ${SDL2_LIBRARY})
 message(SDL2TTF_LIBRARY: ${SDL2TTF_LIBRARY})

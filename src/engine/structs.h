@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include <SDL_opengl.h>
 
 struct Rect {
     int width, height;
