@@ -20,6 +20,10 @@ int main()
     // Window creation
     Window window = Window();
 
+    // Shader creation
+    // REVIEW: This should be here?
+    Shader shader = Shader();
+
     // Main loop
     while(!window.shouldClose()) {
         window.pollEvents();

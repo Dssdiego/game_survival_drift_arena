@@ -42,6 +42,10 @@ message(SDL2_LIBRARY: ${SDL2_LIBRARY})
 message(SDL2TTF_LIBRARY: ${SDL2TTF_LIBRARY})
 message(OPENGL_LIBRARIES: ${OPENGL_LIBRARIES})
 
+# Copy asset folder using a python script
+file(REMOVE_RECURSE ${CMAKE_BINARY_DIR}/assets/)
+execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets assets)
+
 # Link libraries
 target_link_libraries(${PROJECT_NAME}
         ${SDL2_LIBRARY}

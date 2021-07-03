@@ -6,7 +6,8 @@
 
 class Shader
 {
-
+public:
+    Shader();
 };
 
 
