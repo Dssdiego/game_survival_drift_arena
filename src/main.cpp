@@ -13,14 +13,24 @@ int main()
 {
     Log::info("Game engine starting...");
 
-    Window wnd = Window();
-
     // Enable textures and blending
 //    glEnable(GL_TEXTURE_2D);
 //    glEnable(GL_BLEND);
 
-    //
+    // Window creation
+    Window window = Window();
 
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    // Main loop
+    while(!window.shouldClose()) {
+        window.pollEvents();
+        window.clear({0,0,0,1});
+        window.draw();
+    }
+
+    // Cleanup
+    window.cleanUp();
+
+    // Exit
+    Log::info("Game engine exiting...");
+    return EXIT_SUCCESS;
 }
