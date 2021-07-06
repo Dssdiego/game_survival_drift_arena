@@ -87,6 +87,8 @@ Shader::Shader()
         std::vector<GLchar> infoLog(maxLength);
         glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
 
+        std::cout << "error: " << &infoLog[0] << std::endl;
+
         // Don't leak shaders
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
