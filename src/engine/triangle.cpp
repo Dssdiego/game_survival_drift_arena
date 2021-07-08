@@ -6,13 +6,17 @@
 
 #include <SDL_opengl.h>
 #include "triangle.h"
+#include "shader.h"
 
 Triangle::Triangle()
 {
+    Shader shader = Shader("triangle.vert", "triangle.frag");
+    shader.use();
+
     float vertices[] = {
-            0.0f, 0.5f, // Vertex 1 (X, Y)
+            -0.5f, -0.5f, // Vertex 1 (X, Y)
             0.5f, -0.5f, // Vertex 2 (X, Y)
-            -0.5f, -0.5f  // Vertex 3 (X, Y)
+            0.0f,  0.5f  // Vertex 3 (X, Y)
     };
 
     // Creating a Vertex Buffer Object
@@ -29,6 +33,12 @@ Triangle::Triangle()
 
     // Make vao active
     glBindVertexArray(vao);
+
+    // Tell OpenGL how to interpret the data
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
+    glEnableVertexAttribArray(0);
+
+    // TODO: Continue here: https://open.gl/drawing
 }
 
 void Triangle::draw()
