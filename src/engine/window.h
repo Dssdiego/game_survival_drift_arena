@@ -17,12 +17,12 @@ public:
     void draw();
     void cleanUp();
 
+    bool mShouldClose = false;
 private:
     SDL_Window* mWindow;
     SDL_GLContext mContext;
 
     SDL_Event mSDLEvent;
-    bool mShouldClose = false;
 };
 
 

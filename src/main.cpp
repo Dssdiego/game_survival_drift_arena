@@ -6,7 +6,8 @@
 #include <SDL_opengl.h>
 #include <SDL_ttf.h>
 #include "engine.h"
-#include "engine/triangle.h"
+#include "engine/learning/triangle.h"
+#include "engine/learning/triangle_colors.h"
 
 bool closeWindow = false;
 
@@ -21,18 +22,26 @@ int main()
 //    glEnable(GL_TEXTURE_2D);
 //    glEnable(GL_BLEND);
 
-    // Triangle test creation
-    Triangle triangle = Triangle();
+    // Draw testing
+//    Triangle triangle = Triangle();
+    TriangleColors triangleColors = TriangleColors();
+    triangleColors.setWireframe(false);
+
+    // TODO: Check >> Is possible to pass position and color in the same layout?
+    // TODO: Create a quad
+    // TODO: Create 2 triangles/quads using EBO
 
     // Main loop
     while(!window.shouldClose()) {
         window.pollEvents();
         window.clear({0,0,0,1});
-        triangle.draw();
+//        triangle.draw();
+        triangleColors.draw();
         window.draw();
     }
 
     // Cleanup
+    triangleColors.cleanUp();
     window.cleanUp();
 
     // Exit

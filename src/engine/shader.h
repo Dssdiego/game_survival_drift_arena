@@ -15,12 +15,10 @@ class Shader
 public:
     Shader();
 
-    virtual ~Shader();
-
     Shader(std::string vertexShaderName, std::string fragmentShaderName);
 
     void use();
-
+    void cleanUp();
 private:
     GLuint mProgram;
     GLuint mVertexShader;

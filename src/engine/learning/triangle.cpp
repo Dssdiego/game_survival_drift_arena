@@ -6,7 +6,7 @@
 
 #include <SDL_opengl.h>
 #include "triangle.h"
-#include "shader.h"
+#include "../shader.h"
 
 Triangle::Triangle()
 {

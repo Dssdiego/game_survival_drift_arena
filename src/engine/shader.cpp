@@ -148,7 +148,7 @@ void Shader::use()
     glUseProgram(mProgram);
 }
 
-Shader::~Shader()
+void Shader::cleanUp()
 {
     glDeleteShader(mVertexShader);
     glDeleteShader(mFragmentShader);
