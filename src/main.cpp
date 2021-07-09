@@ -8,6 +8,7 @@
 #include "engine.h"
 #include "engine/learning/triangle.h"
 #include "engine/learning/triangle_colors.h"
+#include "engine/learning/quad.h"
 
 bool closeWindow = false;
 
@@ -24,8 +25,9 @@ int main()
 
     // Draw testing
 //    Triangle triangle = Triangle();
-    TriangleColors triangleColors = TriangleColors();
-    triangleColors.setWireframe(false);
+//    TriangleColors triangleColors = TriangleColors();
+//    triangleColors.setWireframe(false);
+    Quad quad = Quad();
 
     // TODO: Check >> Is possible to pass position and color in the same layout?
     // TODO: Create a quad
@@ -36,12 +38,14 @@ int main()
         window.pollEvents();
         window.clear({0,0,0,1});
 //        triangle.draw();
-        triangleColors.draw();
+//        triangleColors.draw();
+        quad.draw();
         window.draw();
     }
 
     // Cleanup
-    triangleColors.cleanUp();
+//    triangleColors.cleanUp();
+    quad.cleanUp();
     window.cleanUp();
 
     // Exit
