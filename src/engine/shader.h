@@ -14,12 +14,17 @@ class Shader
 {
 public:
     Shader();
+
+    virtual ~Shader();
+
     Shader(std::string vertexShaderName, std::string fragmentShaderName);
 
     void use();
 
 private:
     GLuint mProgram;
+    GLuint mVertexShader;
+    GLuint mFragmentShader;
 };
 
 

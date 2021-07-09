@@ -26,28 +26,28 @@ Shader::Shader(std::string vertexShaderName, std::string fragmentShaderName)
                            (std::istreambuf_iterator<char>()    ) );
 
     // Create empty vertex shader handle
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    mVertexShader = glCreateShader(GL_VERTEX_SHADER);
 
     // Send vertex shader source code to GL
     const GLchar* vertexGlSrc = vertexSrc.c_str();
-    glShaderSource(vertexShader, 1, &vertexGlSrc, nullptr);
+    glShaderSource(mVertexShader, 1, &vertexGlSrc, nullptr);
 
     // Compile vertex shader
-    glCompileShader(vertexShader);
+    glCompileShader(mVertexShader);
 
     // Check for compilation errors
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
+    glGetShaderiv(mVertexShader, GL_COMPILE_STATUS, &isCompiled);
 
     // If the vertex shader didn't compile...
     if(isCompiled == GL_FALSE)
     {
         GLint maxLength = 0;
-        glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
+        glGetShaderiv(mVertexShader, GL_INFO_LOG_LENGTH, &maxLength);
 
         std::vector<GLchar> infoLog(maxLength);
-        glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &infoLog[0]);
+        glGetShaderInfoLog(mVertexShader, maxLength, &maxLength, &infoLog[0]);
 
-        glDeleteShader(vertexShader);
+        glDeleteShader(mVertexShader);
 
         Log::error("Error compiling vertex shader");
 
@@ -64,32 +64,32 @@ Shader::Shader(std::string vertexShaderName, std::string fragmentShaderName)
                              (std::istreambuf_iterator<char>()    ) );
 
     // Create empty fragment shader handle
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    mFragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
     // Send fragment shader source code to GL
     const GLchar* fragmentGlSrc = fragmentSrc.c_str();
-    glShaderSource(fragmentShader, 1, &fragmentGlSrc, nullptr);
+    glShaderSource(mFragmentShader, 1, &fragmentGlSrc, nullptr);
 
     // Compile fragment shader
-    glCompileShader(fragmentShader);
+    glCompileShader(mFragmentShader);
 
     // Check for errors on fragment shader compilation
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
+    glGetShaderiv(mFragmentShader, GL_COMPILE_STATUS, &isCompiled);
 
     // If the fragment shader didn't compile...
     if(isCompiled == GL_FALSE)
     {
         GLint maxLength = 0;
-        glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
+        glGetShaderiv(mFragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
 
         std::vector<GLchar> infoLog(maxLength);
-        glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
+        glGetShaderInfoLog(mFragmentShader, maxLength, &maxLength, &infoLog[0]);
 
         std::cout << "error: " << &infoLog[0] << std::endl;
 
         // Don't leak shaders
-        glDeleteShader(vertexShader);
-        glDeleteShader(fragmentShader);
+        glDeleteShader(mVertexShader);
+        glDeleteShader(mFragmentShader);
 
         Log::error("Error compiling fragment shader");
 
@@ -103,8 +103,8 @@ Shader::Shader(std::string vertexShaderName, std::string fragmentShaderName)
     mProgram = glCreateProgram();
 
     // Attach both our shaders to the program
-    glAttachShader(mProgram, vertexShader);
-    glAttachShader(mProgram, fragmentShader);
+    glAttachShader(mProgram, mVertexShader);
+    glAttachShader(mProgram, mFragmentShader);
 
     Log::info("Linking vertex and fragment shaders to program");
 
@@ -129,8 +129,8 @@ Shader::Shader(std::string vertexShaderName, std::string fragmentShaderName)
         glDeleteProgram(mProgram);
 
         // Don't leak shaders...
-        glDeleteShader(vertexShader);
-        glDeleteShader(fragmentShader);
+        glDeleteShader(mVertexShader);
+        glDeleteShader(mFragmentShader);
 
         Log::error("Error linking shader program");
 
@@ -138,12 +138,19 @@ Shader::Shader(std::string vertexShaderName, std::string fragmentShaderName)
     }
 
     // Dettach our shaders (we don't need them anymore)
-    glDetachShader(mProgram, vertexShader);
-    glDetachShader(mProgram, fragmentShader);
+    glDetachShader(mProgram, mVertexShader);
+    glDetachShader(mProgram, mFragmentShader);
 }
 
 void Shader::use()
 {
     // Use our shader
     glUseProgram(mProgram);
+}
+
+Shader::~Shader()
+{
+    glDeleteShader(mVertexShader);
+    glDeleteShader(mFragmentShader);
+    glDeleteProgram(mProgram);
 }
