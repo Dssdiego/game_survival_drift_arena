@@ -19,6 +19,7 @@ find_package(OpenGL REQUIRED)
 include_directories(
         ${SDL2_INCLUDE_DIR}
         ${SDL2TTF_INCLUDE_DIR}
+        libs
 )
 
 message(SDL2_INCLUDE_DIR: ${SDL2_INCLUDE_DIR})
