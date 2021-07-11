@@ -19,6 +19,8 @@ public:
 
     void use();
     void cleanUp();
+
+    inline GLuint getProgram() const { return mProgram; }
 private:
     GLuint mProgram;
     GLuint mVertexShader;

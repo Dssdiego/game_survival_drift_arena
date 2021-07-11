@@ -88,12 +88,14 @@ QuadTextured::QuadTextured()
     // Tell OpenGL how to interpret the data
 
     // positions (x,y)
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), nullptr);
+    GLint idxPosition = glGetAttribLocation(mShader.getProgram(), "aPos");
+    glEnableVertexAttribArray(idxPosition);
+    glVertexAttribPointer(idxPosition, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), nullptr);
 
     // texture coordinates (s,t)
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*) (2 * sizeof(float)));
+    GLint idxTexCoords = glGetAttribLocation(mShader.getProgram(), "aTexCoords");
+    glEnableVertexAttribArray(idxTexCoords);
+    glVertexAttribPointer(idxTexCoords, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*) (2 * sizeof(float)));
 }
 
 void QuadTextured::draw()
