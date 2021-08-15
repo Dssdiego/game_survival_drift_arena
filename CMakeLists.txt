@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6)
-project(marathon_game_jam)
+project(survival_drift_arena)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
