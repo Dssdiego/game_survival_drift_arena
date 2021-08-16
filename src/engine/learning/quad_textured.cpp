@@ -11,7 +11,7 @@
 QuadTextured::QuadTextured()
 {
     // Image configuration
-    std::string imgName = "assets/sprites/popcat.jpg";
+    std::string imgName = "assets/sprites/car.png";
     int imgWidth, imgHeight, imgChannels;
 
     // REVIEW: Could be the other way around. I have to check
@@ -38,7 +38,7 @@ QuadTextured::QuadTextured()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); // best for pixel art
 
     // Copy image data to texture (upload to GPU)
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imgWidth, imgHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imgData);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imgData);
 
     // Free image from CPU memory (texture is already uploaded to GPU)
     stbi_image_free(imgData);
