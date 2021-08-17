@@ -4,7 +4,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_opengl.h>
-#include <SDL_ttf.h>
+//#include <SDL_ttf.h>
 #include "engine.h"
 #include "engine/learning/triangle.h"
 #include "engine/learning/triangle_colors.h"
