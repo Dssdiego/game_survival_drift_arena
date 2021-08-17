@@ -6,7 +6,7 @@
 
 #include <string>
 
-enum ImageType {
+enum ImageFormat {
     PNG,
     JPG
 };
@@ -14,7 +14,7 @@ enum ImageType {
 class Texture
 {
 public:
-    void load(const std::string& imageFileName);
+    void load(const std::string& imagePath, ImageFormat format);
     void dispose();
 
 //    inline unsigned int getTexture() const { return mTexId; }

@@ -10,7 +10,7 @@
 #include <stb_image.h>
 #include "texture.h"
 
-void Texture::load(const std::string& imageFileName)
+void Texture::load(const std::string& imagePath, ImageFormat format)
 {
     // REVIEW: Could be the other way around. I have to check
     // OpenGL loads image from bottom to top while stbi loads image from top to bottom.
@@ -18,7 +18,7 @@ void Texture::load(const std::string& imageFileName)
     stbi_set_flip_vertically_on_load(true);
 
     // Load image to texture
-    mData = stbi_load(imageFileName.c_str(), &mWidth, &mHeight, &mChannels, 0);
+    mData = stbi_load(imagePath.c_str(), &mWidth, &mHeight, &mChannels, 0);
 
     // Create texture object (handler)
     glGenTextures(1, &mTexId);
