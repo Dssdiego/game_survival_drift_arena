@@ -20,6 +20,7 @@ bool closeWindow = false;
 
 int main()
 {
+    Log::initLogFile();
     Log::info("Game engine starting...");
 
     // Window creation
