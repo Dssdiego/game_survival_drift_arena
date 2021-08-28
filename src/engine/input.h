@@ -4,17 +4,6 @@
 
 #pragma once
 
-//enum Key {
-//    A, B, C, D, E, F, G,
-//    H, I, J, K, L, M, N,
-//    O, P, Q, R, S, T, U,
-//    V, W, X, Y, Z,
-//    LEFT_SHIFT, RIGHT_SHIFT,
-//    LEFT_ALT, RIGHT_ALT,
-//    LEFT_CONTROL, RIGHT_CONTROL,
-//    ARROW_LEFT, ARROW_RIGHT
-//};
-
 // These are generally copied from the SDL2 Scancode Keys,
 // which are in turn based on the USB standards:
 // https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf
@@ -48,16 +37,16 @@ enum class Key {
     Y = 28,
     Z = 29,
 
-    Alpha1 = 30,
-    Alpha2 = 31,
-    Alpha3 = 32,
-    Alpha4 = 33,
-    Alpha5 = 34,
-    Alpha6 = 35,
-    Alpha7 = 36,
-    Alpha8 = 37,
-    Alpha9 = 38,
-    Alpha0 = 39,
+    Number1 = 30,
+    Number2 = 31,
+    Number3 = 32,
+    Number4 = 33,
+    Number5 = 34,
+    Number6 = 35,
+    Number7 = 36,
+    Number8 = 37,
+    Number9 = 38,
+    Number0 = 39,
 
     Return = 40,
     Escape = 41,
@@ -92,7 +81,12 @@ enum class Key {
     F11 = 68,
     F12 = 69,
 
-    PrintScreen = 74,
+    PrintScreen = 70,
+    ScrollLock = 71,
+    Pause = 72,
+    Insert = 73,
+
+    Home = 74,
     PageUp = 75,
     Delete = 76,
     End = 77,
@@ -103,7 +97,8 @@ enum class Key {
     Down = 81,
     Up = 82,
 
-    KeypadNumLock = 84,
+    KeypadNumLockClear = 83, // Num lock on PC, clear on Mac keyboards
+    KeypadDivide = 84,
     KeypadMultiply = 85,
     KeypadMinus = 86,
     KeypadPlus = 87,
@@ -122,10 +117,62 @@ enum class Key {
 
     KeypadPeriod = 99,
     KeypadEquals = 103,
-
+    KeypadComma = 133,
+    
     F13 = 104,
+    F14 = 105,
+    F15 = 106,
+    F16 = 107,
+    F17 = 108,
+    F18 = 109,
+    F19 = 110,
+    F20 = 111,
+    F21 = 112,
+    F22 = 113,
+    F23 = 114,
+    F24 = 115,
 
-    // TODO: Continue implementation >> https://www.libsdl.org/tmp/SDL/include/SDL_scancode.h
+    LeftControl = 224,
+    LeftShift = 225,
+    LeftAlt = 226, // Alt on windows, option on Mac
+    LeftOS = 227, // Windows key, Command (Mac) key
+
+    RightControl = 228,
+    RightShift = 229,
+    RightAlt = 230, // Alt gr on windows, option on mac
+    RighOS = 231, // Windows key, Command (Mac) key
+
+    // Reference: https://www.libsdl.org/tmp/SDL/include/SDL_scancode.h
+};
+
+enum class JoystickButton 
+{
+    None = -1,
+
+    A = 0,
+    B = 1,
+    X = 2,
+    Y = 3,
+
+    Back = 4,
+    Select = 5,
+    Start = 6,
+
+    LeftStick = 7,
+    RightStick = 8,
+
+    Up = 11,
+    Down = 12,
+    Left = 13,
+    Right = 14,
+};
+
+enum class MouseButton
+{
+    None = -1,
+    Left = 0,
+    Middle = 1,
+    Right = 2,
 };
 
 enum class KeyPad {
