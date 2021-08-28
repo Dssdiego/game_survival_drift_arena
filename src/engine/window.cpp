@@ -22,6 +22,20 @@ Window::Window()
 //        std::string sdlErrorStr = "SDL could not initialize! SDL_Error: " + std::to_string(SDL_GetError());
         Log::error("SDL could not be initialized!");
     }
+    else
+    {
+        Log::info("SDL initialized successfully");
+    }
+
+    // Init SDL Joystick module
+    if (SDL_Init(SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER) < 0)
+    {
+        Log::error("SDL joystick module could not be initialized!");
+    }
+    else
+    {
+        Log::info("SDL joystick module initialized successfully");
+    }
 
     SDL_version sdlVersion;
     SDL_GetVersion(&sdlVersion);
