@@ -1,0 +1,25 @@
+﻿{
+  "configurations": [
+    {
+      "name": "x86-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x86_x64" ],
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "SDL2MAIN_LIBRARY",
+          "value": "C:/vcpkg/packages/sdl2_x86-windows/lib/manual-link/SDL2main.lib",
+          "type": "FILEPATH"
+        },
+        {
+          "name": "SDL2_LIBRARY",
+          "value": "C:/vcpkg/packages/sdl2_x86-windows/lib/manual-link/SDL2main.lib;C:/vcpkg/packages/sdl2_x86-windows/lib/SDL2.lib",
+          "type": "STRING"
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,9 @@
 // Created by Diego Santos Seabra on 27/06/21.
 //
 
+#if UNIX
 #define GL_GLEXT_PROTOTYPES
+#endif
 
 #include "shader.h"
 #include "log.h"

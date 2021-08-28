@@ -4,7 +4,13 @@
 
 #pragma once
 
+#if UNIX
 #include <SDL_opengl.h>
+#else
+#include <gl/glew.h>
+#endif
+
+#include <string>
 #include "../shader.h"
 
 class QuadTextured

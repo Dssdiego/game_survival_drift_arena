@@ -6,6 +6,11 @@
 #include "window.h"
 #include "constants.h"
 #include "log.h"
+#include <string>
+
+#if WIN32
+#include <gl/glew.h>
+#endif
 
 Window::Window()
 {
@@ -31,6 +36,7 @@ Window::Window()
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -52,6 +58,16 @@ Window::Window()
     // FIXME: Change to log class
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
     std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+
+    // GLEW init (Windows only)
+#if WIN32
+    if (glewInit() != GLEW_OK) 
+    {
+        Log::error("GLEW could not be initialized!");
+    }
+#endif
+        
+
 }
 
 

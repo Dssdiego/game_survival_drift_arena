@@ -3,7 +3,12 @@
 
 #include <iostream>
 #include <SDL.h>
+
+#if WIN32
+#undef main
+#else
 #include <SDL_opengl.h>
+#endif
 //#include <SDL_ttf.h>
 #include "engine.h"
 #include "engine/learning/triangle.h"
