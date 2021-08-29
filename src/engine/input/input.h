@@ -188,6 +188,14 @@ class Input
 {
 public:
     bool isPressed();
+
+    bool getKeypressed(Key key);
+
+    bool getButtonPressed(Button btn);
+
+    bool getMouseButtonPressed(MouseButton mouseBtn);
+
+    //bool isJoystickConnected();
 };
 
 
