@@ -1,173 +1,167 @@
+#.rst:
+# Find SDL2
+# ---------
+#
+# Finds the SDL2 library. This module defines:
+#
+#  SDL2_FOUND               - True if SDL2 library is found
+#  SDL2::SDL2               - SDL2 imported target
+#
+# Additionally these variables are defined for internal usage:
+#
+#  SDL2_LIBRARY             - SDL2 library
+#  SDL2_LIBRARY_DEBUG       - SDL2 debug library
+#  SDL2_LIBRARY_RELEASE     - SDL2 release library
+#  SDL2_INCLUDE_DIR         - Root include dir
+#
 
-# This module defines
-# SDL2_LIBRARY, the name of the library to link against
-# SDL2_FOUND, if false, do not try to link to SDL2
-# SDL2_INCLUDE_DIR, where to find SDL.h
 #
-# This module responds to the the flag:
-# SDL2_BUILDING_LIBRARY
-# If this is defined, then no SDL2main will be linked in because
-# only applications need main().
-# Otherwise, it is assumed you are building an application and this
-# module will attempt to locate and set the the proper link flags
-# as part of the returned SDL2_LIBRARY variable.
+#   This file is part of Magnum.
 #
-# Don't forget to include SDLmain.h and SDLmain.m your project for the
-# OS X framework based version. (Other versions link to -lSDL2main which
-# this module will try to find on your behalf.) Also for OS X, this
-# module will automatically add the -framework Cocoa on your behalf.
+#   Copyright © 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018
+#             Vladimír Vondruš <mosra@centrum.cz>
 #
+#   Permission is hereby granted, free of charge, to any person obtaining a
+#   copy of this software and associated documentation files (the "Software"),
+#   to deal in the Software without restriction, including without limitation
+#   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+#   and/or sell copies of the Software, and to permit persons to whom the
+#   Software is furnished to do so, subject to the following conditions:
 #
-# Additional Note: If you see an empty SDL2_LIBRARY_TEMP in your configuration
-# and no SDL2_LIBRARY, it means CMake did not find your SDL2 library
-# (SDL2.dll, libsdl2.so, SDL2.framework, etc).
-# Set SDL2_LIBRARY_TEMP to point to your SDL2 library, and configure again.
-# Similarly, if you see an empty SDL2MAIN_LIBRARY, you should set this value
-# as appropriate. These values are used to generate the final SDL2_LIBRARY
-# variable, but when these values are unset, SDL2_LIBRARY does not get created.
+#   The above copyright notice and this permission notice shall be included
+#   in all copies or substantial portions of the Software.
 #
+#   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+#   THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+#   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+#   DEALINGS IN THE SOFTWARE.
 #
-# $SDL2DIR is an environment variable that would
-# correspond to the ./configure --prefix=$SDL2DIR
-# used in building SDL2.
-# l.e.galup  9-20-02
-#
-# Modified by Eric Wing.
-# Added code to assist with automated building by using environmental variables
-# and providing a more controlled/consistent search behavior.
-# Added new modifications to recognize OS X frameworks and
-# additional Unix paths (FreeBSD, etc).
-# Also corrected the header search path to follow "proper" SDL guidelines.
-# Added a search for SDL2main which is needed by some platforms.
-# Added a search for threads which is needed by some platforms.
-# Added needed compile switches for MinGW.
-#
-# On OSX, this will prefer the Framework version (if found) over others.
-# People will have to manually change the cache values of
-# SDL2_LIBRARY to override this selection or set the CMake environment
-# CMAKE_INCLUDE_PATH to modify the search paths.
-#
-# Note that the header path has changed from SDL2/SDL.h to just SDL.h
-# This needed to change because "proper" SDL convention
-# is #include "SDL.h", not <SDL2/SDL.h>. This is done for portability
-# reasons because not all systems place things in SDL2/ (see FreeBSD).
 
-#=============================================================================
-# Copyright 2003-2009 Kitware, Inc.
-#
-# Distributed under the OSI-approved BSD License (the "License");
-# see accompanying file Copyright.txt for details.
-#
-# This software is distributed WITHOUT ANY WARRANTY; without even the
-# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the License for more information.
-#=============================================================================
-# (To distribute this file outside of CMake, substitute the full
-#  License text for the above reference.)
-
-# message("<FindSDL2.cmake>")
-
-SET(SDL2_SEARCH_PATHS
-        ~/Library/Frameworks
-        /Library/Frameworks
-        /usr/local
-        /usr
-        /sw # Fink
-        /opt/local # DarwinPorts
-        /opt/csw # Blastwave
-        /opt
-        ${SDL2_PATH}
-        )
-
-FIND_PATH(SDL2_INCLUDE_DIR SDL.h
-        HINTS
-        $ENV{SDL2DIR}
-        PATH_SUFFIXES include/SDL2 include
-        PATHS ${SDL2_SEARCH_PATHS}
-        )
-
-if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    set(PATH_SUFFIXES lib64 lib/x64 lib)
+# In Emscripten SDL is linked automatically, thus no need to find the library.
+# Also the includes are in SDL subdirectory, not SDL2.
+if(CORRADE_TARGET_EMSCRIPTEN)
+    set(_SDL2_PATH_SUFFIXES SDL)
 else()
-    set(PATH_SUFFIXES lib/x86 lib)
+    # Precompiled libraries for Windows are in x86/x64 subdirectories
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        set(_SDL_LIBRARY_PATH_SUFFIX lib/x64)
+    elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+        set(_SDL_LIBRARY_PATH_SUFFIX lib/x86)
+    endif()
+
+    find_library(SDL2_LIBRARY_RELEASE
+        # Compiling SDL2 from scratch on macOS creates dead libSDL2.so symlink
+        # which CMake somehow prefers before the SDL2-2.0.dylib file. Making
+        # the dylib first so it is preferred.
+        NAMES SDL2-2.0 SDL2
+        PATH_SUFFIXES ${_SDL_LIBRARY_PATH_SUFFIX})
+    find_library(SDL2_LIBRARY_DEBUG
+        NAMES SDL2d
+        PATH_SUFFIXES ${_SDL_LIBRARY_PATH_SUFFIX})
+    set(SDL2_LIBRARY_NEEDED SDL2_LIBRARY)
+    set(_SDL2_PATH_SUFFIXES SDL2)
 endif()
 
-FIND_LIBRARY(SDL2_LIBRARY_TEMP
-        NAMES SDL2
-        HINTS
-        $ENV{SDL2DIR}
-        PATH_SUFFIXES ${PATH_SUFFIXES}
-        PATHS ${SDL2_SEARCH_PATHS}
-        )
+include(SelectLibraryConfigurations)
+select_library_configurations(SDL2)
 
-IF(NOT SDL2_BUILDING_LIBRARY)
-    IF(NOT ${SDL2_INCLUDE_DIR} MATCHES ".framework")
-        # Non-OS X framework versions expect you to also dynamically link to
-        # SDL2main. This is mainly for Windows and OS X. Other (Unix) platforms
-        # seem to provide SDL2main for compatibility even though they don't
-        # necessarily need it.
-        FIND_LIBRARY(SDL2MAIN_LIBRARY
-                NAMES SDL2main
-                HINTS
-                $ENV{SDL2DIR}
-                PATH_SUFFIXES ${PATH_SUFFIXES}
-                PATHS ${SDL2_SEARCH_PATHS}
-                )
-    ENDIF(NOT ${SDL2_INCLUDE_DIR} MATCHES ".framework")
-ENDIF(NOT SDL2_BUILDING_LIBRARY)
+# Include dir
+find_path(SDL2_INCLUDE_DIR
+    # We must search file which is present only in SDL2 and not in SDL1.
+    # Apparently when both SDL.h and SDL_scancode.h are specified, CMake is
+    # happy enough that it found SDL.h and doesn't bother about the other.
+    #
+    # On macOS, where the includes are not in SDL2/SDL.h form (which would
+    # solve this issue), but rather SDL2.framework/Headers/SDL.h, CMake might
+    # find SDL.framework/Headers/SDL.h if SDL1 is installed, which is wrong.
+    NAMES SDL_scancode.h
+    PATH_SUFFIXES ${_SDL2_PATH_SUFFIXES})
 
-# SDL2 may require threads on your system.
-# The Apple build may not need an explicit flag because one of the
-# frameworks may already provide it.
-# But for non-OSX systems, I will use the CMake Threads package.
-IF(NOT APPLE)
-    FIND_PACKAGE(Threads)
-ENDIF(NOT APPLE)
+# iOS dependencies
+if(CORRADE_TARGET_IOS)
+    set(_SDL2_FRAMEWORKS
+        AudioToolbox
+        AVFoundation
+        CoreGraphics
+        CoreMotion
+        Foundation
+        GameController
+        QuartzCore
+        UIKit)
+    set(_SDL2_FRAMEWORK_LIBRARIES )
+    foreach(framework ${_SDL2_FRAMEWORKS})
+        find_library(_SDL2_${framework}_LIBRARY ${framework})
+        mark_as_advanced(_SDL2_${framework}_LIBRARY)
+        list(APPEND _SDL2_FRAMEWORK_LIBRARIES ${_SDL2_${framework}_LIBRARY})
+        list(APPEND _SDL2_FRAMEWORK_LIBRARY_NAMES _SDL2_${framework}_LIBRARY)
+    endforeach()
+endif()
 
-# MinGW needs an additional link flag, -mwindows
-# It's total link flags should look like -lmingw32 -lSDL2main -lSDL2 -mwindows
-IF(MINGW)
-    SET(MINGW32_LIBRARY mingw32 "-mwindows" CACHE STRING "mwindows for MinGW")
-ENDIF(MINGW)
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args("SDL2" DEFAULT_MSG
+    ${SDL2_LIBRARY_NEEDED}
+    ${_SDL2_FRAMEWORK_LIBRARY_NAMES}
+    SDL2_INCLUDE_DIR)
 
-IF(SDL2_LIBRARY_TEMP)
-    # For SDL2main
-    IF(NOT SDL2_BUILDING_LIBRARY)
-        IF(SDL2MAIN_LIBRARY)
-            SET(SDL2_LIBRARY_TEMP ${SDL2MAIN_LIBRARY} ${SDL2_LIBRARY_TEMP})
-        ENDIF(SDL2MAIN_LIBRARY)
-    ENDIF(NOT SDL2_BUILDING_LIBRARY)
+if(NOT TARGET SDL2::SDL2)
+    if(SDL2_LIBRARY_NEEDED)
+        # CMake 3.0 doesn't propagate the local target as dependency upwards
+        # the tree and then complains that SDL2::SDL2 target was not found,
+        # which it shouldn't. This is reproducible with the base bootstrap
+        # project *and* when using Magnum as CMake subproject. Works with both
+        # 2.8.12 and 3.1, so I'm assuming this is a CMake 3.0 bug. The
+        # workaround is to make the target GLOBAL so it's propagated upwards
+        # the tree unconditionally. For some reason, UNKNOWN targets can't be
+        # marked as GLOBAL, so I'm  biting the bullet and saying the library is
+        # shared -- CMake 3.0 is only on Debian Jessie now and I'm assuming SDL
+        # comes from system libsdl2-dev package, which *is* shared. Hopefully
+        # this won't bite back in the future.
+        if(CMAKE_VERSION VERSION_GREATER "2.8.12.2" AND CMAKE_VERSION VERSION_LESS "3.1.0")
+            set(_SDL2_IMPORTED_LIBRARY_KIND SHARED IMPORTED GLOBAL)
+        else()
+            set(_SDL2_IMPORTED_LIBRARY_KIND UNKNOWN IMPORTED)
+        endif()
+        add_library(SDL2::SDL2 ${_SDL2_IMPORTED_LIBRARY_KIND})
 
-    # For OS X, SDL2 uses Cocoa as a backend so it must link to Cocoa.
-    # CMake doesn't display the -framework Cocoa string in the UI even
-    # though it actually is there if I modify a pre-used variable.
-    # I think it has something to do with the CACHE STRING.
-    # So I use a temporary variable until the end so I can set the
-    # "real" variable in one-shot.
-    IF(APPLE)
-        SET(SDL2_LIBRARY_TEMP ${SDL2_LIBRARY_TEMP} "-framework Cocoa")
-    ENDIF(APPLE)
+        # Work around BUGGY framework support on macOS
+        # https://cmake.org/Bug/view.php?id=14105
+        if(CORRADE_TARGET_APPLE AND SDL2_LIBRARY_RELEASE MATCHES "\\.framework$")
+            set_property(TARGET SDL2::SDL2 APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+            set_property(TARGET SDL2::SDL2 PROPERTY IMPORTED_LOCATION_RELEASE ${SDL2_LIBRARY_RELEASE}/SDL2)
+        else()
+            if(SDL2_LIBRARY_RELEASE)
+                set_property(TARGET SDL2::SDL2 APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+                set_property(TARGET SDL2::SDL2 PROPERTY IMPORTED_LOCATION_RELEASE ${SDL2_LIBRARY_RELEASE})
+            endif()
 
-    # For threads, as mentioned Apple doesn't need this.
-    # In fact, there seems to be a problem if I used the Threads package
-    # and try using this line, so I'm just skipping it entirely for OS X.
-    IF(NOT APPLE)
-        SET(SDL2_LIBRARY_TEMP ${SDL2_LIBRARY_TEMP} ${CMAKE_THREAD_LIBS_INIT})
-    ENDIF(NOT APPLE)
+            if(SDL2_LIBRARY_DEBUG)
+                set_property(TARGET SDL2::SDL2 APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
+                set_property(TARGET SDL2::SDL2 PROPERTY IMPORTED_LOCATION_DEBUG ${SDL2_LIBRARY_DEBUG})
+            endif()
+        endif()
 
-    # For MinGW library
-    IF(MINGW)
-        SET(SDL2_LIBRARY_TEMP ${MINGW32_LIBRARY} ${SDL2_LIBRARY_TEMP})
-    ENDIF(MINGW)
+        # Link frameworks on iOS
+        if(CORRADE_TARGET_IOS)
+            set_property(TARGET SDL2::SDL2 APPEND PROPERTY
+                INTERFACE_LINK_LIBRARIES ${_SDL2_FRAMEWORK_LIBRARIES})
+        endif()
 
-    # Set the final string here so the GUI reflects the final state.
-    SET(SDL2_LIBRARY ${SDL2_LIBRARY_TEMP} CACHE STRING "Where the SDL2 Library can be found")
-    # Set the temp variable to INTERNAL so it is not seen in the CMake GUI
-    SET(SDL2_LIBRARY_TEMP "${SDL2_LIBRARY_TEMP}" CACHE INTERNAL "")
-ENDIF(SDL2_LIBRARY_TEMP)
+        # Link also EGL library, if on ES (and not on WebGL)
+        if(MAGNUM_TARGET_GLES AND NOT MAGNUM_TARGET_DESKTOP_GLES AND NOT MAGNUM_TARGET_WEBGL)
+            find_package(EGL REQUIRED)
+            set_property(TARGET SDL2::SDL2 APPEND PROPERTY
+                INTERFACE_LINK_LIBRARIES EGL::EGL)
+        endif()
+    else()
+        # This won't work in CMake 2.8.12, but that affects Emscripten only so
+        # I assume people building for that are not on that crap old Ubuntu
+        # 14.04 LTS
+        add_library(SDL2::SDL2 INTERFACE IMPORTED)
+    endif()
 
-# message("</FindSDL2.cmake>")
-
-INCLUDE(FindPackageHandleStandardArgs)
-
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(SDL2 REQUIRED_VARS SDL2_LIBRARY SDL2_INCLUDE_DIR)
+    set_property(TARGET SDL2::SDL2 PROPERTY
+        INTERFACE_INCLUDE_DIRECTORIES ${SDL2_INCLUDE_DIR})
+endif()
