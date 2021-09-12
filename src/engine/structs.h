@@ -3,13 +3,8 @@
 //
 
 #pragma once
-#include <SDL_opengl.h>
+//#include <SDL_opengl.h>
 
 struct Rect {
     int width, height;
 };
-
-struct Vec2 {
-    GLfloat x, y;
-};
-

@@ -9,14 +9,11 @@
 #else
 #include <SDL_opengl.h>
 #endif
-//#include <SDL_ttf.h>
 #include "engine.h"
 #include "engine/learning/triangle.h"
 #include "engine/learning/triangle_colors.h"
 #include "engine/learning/quad.h"
 #include "engine/learning/quad_textured.h"
-
-bool closeWindow = false;
 
 int main()
 {
