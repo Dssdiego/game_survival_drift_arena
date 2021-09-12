@@ -7,4 +7,4 @@
 #include "structs.h"
 
 constexpr Rect CONST_WINDOW_SIZE = {800, 600};
-constexpr char* CONST_GAME_NAME = "Survival Drift Arena";
+constexpr char* CONST_GAME_NAME = "Loop";
