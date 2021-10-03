@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#if UNIX
+#if UNIX || __APPLE__
 #include <SDL_opengl.h>
 #include <SDL_opengl_glext.h>
 #else

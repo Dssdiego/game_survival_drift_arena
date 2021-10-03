@@ -2,7 +2,7 @@
 // Created by Diego Santos Seabra on 10/07/21.
 //
 
-#if UNIX
+#if UNIX || __APPLE__
 #define GL_GLEXT_PROTOTYPES
 #endif
 

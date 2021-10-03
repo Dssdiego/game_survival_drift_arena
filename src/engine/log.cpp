@@ -12,7 +12,7 @@
 #include <ctime>
 #include <sstream>
 
-#if UNIX
+#if UNIX || __APPLE__
 #define RESET "\e[0m"
 #define COLOR_BLACK "\e[0;30m"
 #define COLOR_GRAY "\e[0;37m"
@@ -37,7 +37,7 @@
 void Log::info(const char *message)
 {
 #ifndef NDEBUG
-#if UNIX
+#if UNIX || __APPLE__
     std::cout << COLOR_BLUE << "info::" << message << RESET << std::endl;
 #else
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), COLOR_BLUE);
@@ -52,7 +52,7 @@ void Log::info(const char *message)
 void Log::warn(const char *warning)
 {
 #ifndef NDEBUG
-#if UNIX
+#if UNIX || __APPLE__
     std::cout << COLOR_YELLOW << "warn::" << warning << RESET << std::endl;
 #else
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), COLOR_YELLOW);
@@ -66,7 +66,7 @@ void Log::warn(const char *warning)
 void Log::error(const char *error)
 {
 #ifndef NDEBUG
-#if UNIX
+#if UNIX || __APPLE__
     std::cout << COLOR_RED << "error::" << error << RESET << std::endl;
 #else
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), COLOR_RED);

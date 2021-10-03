@@ -4,7 +4,7 @@
 
 #pragma once
 
-#if UNIX
+#if UNIX || __APPLE__
 #include <SDL_opengl.h>
 #else
 #include <gl/glew.h>

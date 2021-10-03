@@ -3,18 +3,19 @@
 //
 
 #define STB_IMAGE_IMPLEMENTATION
+#if UNIX || __APPLE__
+#define GL_GLEXT_PROTOTYPES
+#endif
 
 #include <iostream>
 #include "window.h"
 #include "constants.h"
 #include "log.h"
 #include <string>
-
-#if WIN32
-
-#include <gl/glew.h>
 #include <stb_image.h>
 
+#if WIN32
+#include <gl/glew.h>
 #endif
 
 #include "input/input.h"
