@@ -5,10 +5,21 @@ Simple 2D Game Engine made from scratch with C++, SDL and FMOD
 # Roadmap
 
 - [X] Textured Quad
-- [ ] Tiled Map Reading
 - [ ] Inputs
   - [ ] Joystick
   - [ ] Keyboard
   - [ ] Mouse
-- [ ] Aseprite File Read
 - [ ] FMOD (Sounds and Music)
+- [ ] Tiled Map Reading
+- [ ] Aseprite File Read
+- [ ] Sprite Batching
+
+# Testing of the engine (Clones of Games)
+
+- [ ] Pong
+- [ ] Flappy Bird
+- [ ] Breakout
+
+# Original Games
+
+TODO...
