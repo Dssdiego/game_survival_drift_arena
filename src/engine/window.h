@@ -5,7 +5,10 @@
 #pragma once
 
 #include <SDL.h>
+
+#if UNIX || __APPLE__
 #include <SDL_opengl.h>
+#endif
 
 class Window
 {
