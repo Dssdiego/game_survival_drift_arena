@@ -1,7 +1,14 @@
-# Survival Drift Arena
+# Loki Engine
 
-Game made entirely from scratch with C++ and Modern OpenGL
+Simple 2D Game Engine made from scratch with C++, SDL and FMOD
 
-## Documentation (Classes)
+# Roadmap
 
-TODO...
+- [X] Textured Quad
+- [ ] Tiled Map Reading
+- [ ] Inputs
+  - [ ] Joystick
+  - [ ] Keyboard
+  - [ ] Mouse
+- [ ] Aseprite File Read
+- [ ] FMOD (Sounds and Music)
