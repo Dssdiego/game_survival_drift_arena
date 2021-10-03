@@ -9,6 +9,10 @@ Simple 2D Game Engine made from scratch with C++, SDL and FMOD
   - [ ] Joystick
   - [ ] Keyboard
   - [ ] Mouse
+- [ ] Window Modes
+  - [ ] Fullscreen
+  - [ ] Resizing 
+- [ ] Font Text Rendering
 - [ ] FMOD (Sounds and Music)
 - [ ] Tiled Map Reading
 - [ ] Aseprite File Read
