@@ -13,12 +13,15 @@ Simple 2D Game Engine made from scratch with C++, SDL and FMOD
 - [ ] Tiled Map Reading
 - [ ] Aseprite File Read
 - [ ] Sprite Batching
+- [ ] Sprite Animation
 
 # Testing of the engine (Clones of Games)
 
 - [ ] Pong
 - [ ] Flappy Bird
 - [ ] Breakout
+- [ ] Patience Card Game
+- [ ] Super Mario World
 
 # Original Games
 
