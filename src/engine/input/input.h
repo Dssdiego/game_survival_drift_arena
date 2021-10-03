@@ -196,6 +196,8 @@ public:
     bool getMouseButtonPressed(MouseButton mouseBtn);
 
     //bool isJoystickConnected();
+
+    static int mouseX, mouseY;
 };
 
 

@@ -14,14 +14,22 @@
 #include "engine/learning/triangle_colors.h"
 #include "engine/learning/quad.h"
 #include "engine/learning/quad_textured.h"
+#include "engine/graphics/aseprite.h"
+#include "engine/graphics/tiled.h"
 
 int main()
 {
     Log::initLogFile();
     Log::info("Game engine starting...");
 
+    Aseprite ase = Aseprite();
+    ase.read("assets/aseprite/test1.ase");
+
     // Window creation
     Window window = Window();
+
+    Tiled tiled = Tiled();
+    tiled.loadMap();
 
     // Enable textures and blending
 //    glEnable(GL_TEXTURE_2D);

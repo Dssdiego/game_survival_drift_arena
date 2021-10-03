@@ -6,7 +6,7 @@
 #define GL_GLEXT_PROTOTYPES
 #endif
 
-#define STB_IMAGE_IMPLEMENTATION
+//#define STB_IMAGE_IMPLEMENTATION
 
 #include "quad_textured.h"
 #include "stb_image.h"

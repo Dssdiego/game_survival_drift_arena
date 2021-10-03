@@ -60,7 +60,6 @@ message(GLEW_LIBRARY: ${GLEW_LIBRARIES})
 message(OPENGL_LIBRARIES: ${OPENGL_LIBRARIES})
 message("")
 
-
 # Copy asset folder using a python script
 file(REMOVE_RECURSE ${CMAKE_BINARY_DIR}/assets/)
 execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets assets)
