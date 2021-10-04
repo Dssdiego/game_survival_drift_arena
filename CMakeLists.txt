@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.7)
-project(survival_drift_arena)
+project(loki_engine)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 

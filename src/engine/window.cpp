@@ -168,7 +168,7 @@ void Window::clear(SDL_Color color) {
 void Window::createEngineIcon() {
     WindowIcon icon;
     icon.format = STBI_rgb_alpha;
-    icon.data = stbi_load("assets/game_icon.png", &icon.width, &icon.height, &icon.nChannels, icon.format);
+    icon.data = stbi_load("assets/engine_icon.png", &icon.width, &icon.height, &icon.nChannels, icon.format);
 
     // Check for errors
     if(icon.data == NULL)
