@@ -22,24 +22,25 @@ int main()
     Log::initLogFile();
     Log::info("Game engine starting...");
 
-    Aseprite ase = Aseprite();
-    ase.read("assets/aseprite/test1.ase");
+//    Aseprite ase = Aseprite();
+//    ase.read("assets/aseprite/test1.ase");
 
     // Window creation
     Window window = Window();
 
-    Tiled tiled = Tiled();
-    tiled.loadMap();
+//    Tiled tiled = Tiled();
+//    tiled.loadMap();
 
     // Enable textures and blending
 //    glEnable(GL_TEXTURE_2D);
-//    glEnable(GL_BLEND);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Draw testing
 //    Triangle triangle = Triangle();
 //    TriangleColors triangleColors = TriangleColors();
 //    triangleColors.setWireframe(false);
-//    Quad quad = Quad();
+    Quad quad = Quad();
     QuadTextured quadTextured = QuadTextured();
 
     // TODO: Create a textured quad (multiplied with color)
@@ -53,14 +54,14 @@ int main()
         window.clear({0,0,0,1});
 //        triangle.draw();
 //        triangleColors.draw();
-//        quad.draw();
         quadTextured.draw();
+        quad.draw();
         window.draw();
     }
 
     // Cleanup
 //    triangleColors.cleanUp();
-//    quad.cleanUp();
+    quad.cleanUp();
     quadTextured.cleanUp();
     window.cleanUp();
 

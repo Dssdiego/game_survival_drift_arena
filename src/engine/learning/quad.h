@@ -1,26 +1,28 @@
-////
-//// Created by Diego Santos Seabra on 09/07/21.
-////
 //
-//#pragma once
+// Created by Diego Santos Seabra on 09/07/21.
 //
-//#if UNIX
-//#include <SDL_opengl.h>
-//#endif
-//
-//#include <gl/glew.h>
-//#include "../shader.h"
-//
-//class Quad
-//{
-//public:
-//    Quad();
-//
-//    void draw();
-//    void cleanUp();
-//private:
-//    GLuint vao, vbo, ebo;
-//    Shader mShader;
-//};
-//
-//
+
+#pragma once
+
+#if UNIX || __APPLE__
+#include <SDL_opengl.h>
+#else
+#include <gl/glew.h>
+#endif
+
+#include "../shader.h"
+
+class Quad
+{
+public:
+    Quad();
+
+    void draw();
+    void cleanUp();
+private:
+    GLuint vao, vbo, ebo;
+    Shader mShader;
+    float alpha = 0.0f;
+};
+
+
