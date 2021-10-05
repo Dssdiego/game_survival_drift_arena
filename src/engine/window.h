@@ -5,6 +5,8 @@
 #pragma once
 
 #include <SDL.h>
+#include <string>
+#include "structs.h"
 
 #if UNIX || __APPLE__
 #include <SDL_opengl.h>
@@ -13,7 +15,7 @@
 class Window
 {
 public:
-    Window();
+    Window(std::string title, Rect size);
 
     bool shouldClose();
     void pollEvents();

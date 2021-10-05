@@ -9,7 +9,6 @@
 
 #include <iostream>
 #include "window.h"
-#include "constants.h"
 #include "log.h"
 #include <string>
 #include <stb_image.h>
@@ -34,7 +33,7 @@ struct WindowIcon {
     Uint32 amask;
 };
 
-Window::Window() {
+Window::Window(std::string title, Rect size) {
     Log::info("Creating window context...");
 
     // Init SDL
@@ -73,9 +72,9 @@ Window::Window() {
 
     // Window creation
     mWindow = SDL_CreateWindow(
-            CONST_GAME_NAME,
+            title.c_str(),
             SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-            CONST_WINDOW_SIZE.width, CONST_WINDOW_SIZE.height,
+            size.width, size.height,
             SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI
     );
 
@@ -140,6 +139,7 @@ void Window::pollEvents() {
     }
 }
 
+// REVIEW: For a lack of a better name, this will continue being 'draw'
 void Window::draw() {
     /* Swap our back buffer to the front (i.e. draw to the screen) */
     SDL_GL_SwapWindow(mWindow);

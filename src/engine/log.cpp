@@ -3,7 +3,6 @@
 //
 
 #include "log.h"
-#include "constants.h"
 
 #include <iostream>
 #include <fstream>

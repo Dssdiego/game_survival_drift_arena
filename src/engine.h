@@ -4,9 +4,6 @@
 
 #pragma once
 
-//#include "engine/camera.h"
-#include "engine/text.h"
 #include "engine/shader.h"
 #include "engine/log.h"
 #include "engine/window.h"
-#include "engine/constants.h"
