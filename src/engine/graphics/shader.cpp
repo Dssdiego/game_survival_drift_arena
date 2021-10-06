@@ -7,7 +7,7 @@
 #endif
 
 #include "shader.h"
-#include "log.h"
+#include "../logging/log.h"
 
 Shader::Shader() { }
 

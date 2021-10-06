@@ -3,7 +3,7 @@
 //
 
 #include "tiled.h"
-#include "../log.h"
+#include "../logging/log.h"
 
 void Tiled::loadMap() {
     auto map = tiled.parse("assets/tiled/tiled_monkey_game_test.json");

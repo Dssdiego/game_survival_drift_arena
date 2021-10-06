@@ -11,7 +11,7 @@
 #endif
 
 #include <string>
-#include "../shader.h"
+#include "../graphics/shader.h"
 
 class QuadTextured
 {

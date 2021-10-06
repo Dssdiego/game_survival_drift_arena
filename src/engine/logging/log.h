@@ -7,7 +7,7 @@
 #include <iostream>
 
 #if WIN32
-#include <windows.h> // Windows header API
+#include <Windows.h> // Windows header API
 #endif
 
 

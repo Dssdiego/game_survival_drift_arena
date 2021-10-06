@@ -10,7 +10,7 @@
 #include <gl/glew.h>
 #endif
 
-#include "../shader.h"
+#include "../graphics/shader.h"
 
 class Quad
 {

@@ -9,7 +9,7 @@
 
 #include <iostream>
 #include "window.h"
-#include "log.h"
+#include "logging/log.h"
 #include <string>
 #include <stb_image.h>
 
