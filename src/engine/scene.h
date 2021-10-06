@@ -1,12 +1,12 @@
 #pragma once
 
-#include "entity.h"
 #include <vector>
+#include "entity/entity.h"
 
 class Scene
 {
 public:
-	void create();
+	void start();
 	void add(Entity e);
 	void remove(Entity e);
 	//void remove(int index); // TODO: Implement

@@ -14,3 +14,8 @@ void Scene::clean()
 {
 	mEntities.clear();
 }
+
+// TODO: What needs to happen when a scene starts?
+void Scene::start() {
+
+}
