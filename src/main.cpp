@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL.h>
 #include "games/pong/pong.h"
+#include "./engine.h"
 
 #if WIN32
 #undef main
@@ -10,6 +11,30 @@
 
 int main()
 {
-    Pong pong = Pong();
+    Log::initLogFile();
+    Log::info("Game engine starting...");
+
+    // Window creation
+    Window window = Window("Pong", {800,600});
+
+    // Game creating
+    Pong game = Pong();
+    game.init();
+
+    // Main loop
+    while(!window.shouldClose()) {
+        window.pollEvents();
+        window.clear({0,0,0,1});
+        game.update();
+        game.draw();
+        window.draw();
+    }
+
+    // Cleanup
+    game.cleanUp();
+    window.cleanUp();
+
+    // Exit
+    Log::info("Game engine exiting...");
     return EXIT_SUCCESS;
 }
