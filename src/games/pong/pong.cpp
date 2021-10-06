@@ -2,26 +2,20 @@
 // Created by dss-d on 04/10/2021.
 //
 
-#include "../../engine.h"
 #include "pong.h"
 
-Pong::Pong() {
-    Log::initLogFile();
-    Log::info("Game engine starting...");
+void Pong::init() {
+    Game::init();
+}
 
-    // Window creation
-    Window window = Window("Pong", {800,600});
+void Pong::update() {
+    Game::update();
+}
 
-    // Main loop
-    while(!window.shouldClose()) {
-        window.pollEvents();
-        window.clear({0,0,0,1});
-        window.draw();
-    }
+void Pong::draw() {
+    Game::draw();
+}
 
-    // Cleanup
-    window.cleanUp();
-
-    // Exit
-    Log::info("Game engine exiting...");
+void Pong::cleanUp() {
+    Game::cleanUp();
 }

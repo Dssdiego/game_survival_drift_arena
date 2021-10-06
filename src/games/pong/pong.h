@@ -4,9 +4,12 @@
 
 #pragma once
 
-class Pong {
-public:
-    Pong();
+#include "../../engine/game.h"
 
-//    void loadAssets();
+class Pong : public Game {
+public:
+    void init() override;
+    void update() override;
+    void draw() override;
+    void cleanUp() override;
 };
