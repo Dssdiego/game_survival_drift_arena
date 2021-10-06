@@ -14,6 +14,7 @@
 
 class Entity {
 public:
+    Entity();
     Entity(Vec2 position, Texture texture);
 
 private:

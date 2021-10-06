@@ -6,11 +6,11 @@
 class Scene
 {
 public:
-	void start();
-	void add(Entity e);
-	void remove(Entity e);
+	virtual void start();
+	void addEntity(Entity e);
+	virtual void removeEntity(Entity e);
 	//void remove(int index); // TODO: Implement
-	void clean();
+	virtual void cleanUp();
 
 private:
 	std::vector<Entity> mEntities;

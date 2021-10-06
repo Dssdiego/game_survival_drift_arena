@@ -6,3 +6,5 @@
 
 Entity::Entity(Vec2 position, Texture texture) : position({0.0f,0.0f}) {
 }
+
+Entity::Entity() { }

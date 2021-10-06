@@ -1,17 +1,18 @@
 #include "scene.h"
 
-void Scene::add(Entity e)
+void Scene::addEntity(Entity e)
 {
 	mEntities.push_back(e);
 }
 
-void Scene::remove(Entity e)
+void Scene::removeEntity(Entity e)
 {
 	//mEntities.erase(e);
 }
 
-void Scene::clean()
+void Scene::cleanUp()
 {
+    // Remove all entities before closing a scene
 	mEntities.clear();
 }
 
