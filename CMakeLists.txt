@@ -6,8 +6,6 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
-# Windows Builds
-
 # SDL2 / SDL2_TTF / GLM
 find_package(SDL2 REQUIRED)
 #find_package(SDL2_ttf REQUIRED)
@@ -19,9 +17,7 @@ if (WIN32)
 endif ()
 
 # OpenGL
-#if(APPLE)
 find_package(OpenGL REQUIRED)
-#endif()
 
 # Include directories
 include_directories(
