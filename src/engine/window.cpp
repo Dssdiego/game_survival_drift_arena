@@ -122,6 +122,11 @@ void Window::pollEvents() {
             toggleFullscreen();
         }
 
+        // Window resizing (adapt viewport)
+        if (mSDLEvent.type == SDL_WINDOWEVENT && mSDLEvent.window.event == SDL_WINDOWEVENT_RESIZED) {
+            glViewport(0, 0, mSDLEvent.window.data1, mSDLEvent.window.data2);
+        }
+
         //if (mSDLEvent.type == SDL_WINDOWEVENT && mSDLEvent.window.event == SDL_WINDOWEVENT_ENTER) {
         //    Log::info("Mouse inside window");
         //}

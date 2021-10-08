@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "games/pong/pong.h"
 #include "./engine.h"
+#include "engine/learning/quad_textured.h"
 
 #if WIN32
 #undef main
@@ -17,21 +18,24 @@ int main()
     // Window creation
     Window window = Window("Pong", {800,600});
 
+    QuadTextured quad = QuadTextured();
     // Game creating
-    Pong game = Pong();
-    game.init();
+//    Pong game = Pong();
+//    game.init();
 
     // Main loop
     while(!window.shouldClose()) {
         window.pollEvents();
         window.clear({0,0,0,1});
-        game.update();
-        game.draw();
+//        game.update();
+//        game.draw();
+        quad.draw();
         window.draw();
     }
 
     // Cleanup
-    game.cleanUp();
+//    game.cleanUp();
+    quad.cleanUp();
     window.cleanUp();
 
     // Exit
