@@ -4,6 +4,11 @@
 
 #pragma once
 
+#define SDL_MAIN_HANDLED
+#include <SDL.h>
+#include <SDL_haptic.h>
+#include <SDL_joystick.h>
+
 // These are generally copied from the SDL2 Scancode Keys,
 // which are in turn based on the USB standards:
 // https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf
@@ -187,17 +192,22 @@ enum class Button {
 class Input
 {
 public:
-    bool isPressed();
+//    static bool isPressed();
+//    static bool getKeypressed(Key key);
+//    static bool getButtonPressed(Button btn);
+//    static bool getMouseButtonPressed(MouseButton mouseBtn);
 
-    bool getKeypressed(Key key);
+    static void init();
+    static void dispose();
 
-    bool getButtonPressed(Button btn);
-
-    bool getMouseButtonPressed(MouseButton mouseBtn);
+    static void vibrateJoystick(float force, int seconds);
 
     //bool isJoystickConnected();
 
     static int mouseX, mouseY;
+private:
+    inline static SDL_Joystick *mJoystick = nullptr;
+    inline static SDL_Haptic *mHaptic = nullptr;
 };
 
 

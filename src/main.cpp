@@ -18,6 +18,10 @@ int main()
     // Window creation
     Window window = Window("Pong", {800,600});
 
+    // Input init
+    Input::init();
+//    Input::vibrateJoystick(0.25f, 5);
+
     QuadTextured quad = QuadTextured();
     // Game creating
 //    Pong game = Pong();
@@ -34,6 +38,7 @@ int main()
     }
 
     // Cleanup
+    Input::dispose();
 //    game.cleanUp();
     quad.cleanUp();
     window.cleanUp();

@@ -44,6 +44,7 @@ Window::Window(std::string title, Rect size) {
         Log::info("SDL initialized successfully");
     }
 
+    // REVIEW: This should be initialized in the window class? Perhaps in a separate SDL/platform class?
     // Init SDL Joystick module
     if (SDL_Init(SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER) < 0) {
         Log::error("SDL joystick module could not be initialized!");
@@ -51,6 +52,14 @@ Window::Window(std::string title, Rect size) {
         Log::info("SDL joystick module initialized successfully");
     }
 
+    // Init SDL Haptic module
+    if (SDL_Init(SDL_INIT_HAPTIC) < 0)
+    {
+        Log::error("SDL haptic module could not be initialized!");
+    } else
+    {
+        Log::info("SDL haptic module initialized successfully");
+    }
 
     SDL_version sdlVersion;
     SDL_GetVersion(&sdlVersion);
