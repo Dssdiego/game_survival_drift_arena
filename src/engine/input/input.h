@@ -193,7 +193,7 @@ class Input
 {
 public:
 //    static bool isPressed();
-//    static bool getKeypressed(Key key);
+    static bool getKeyPressed(Key key);
 //    static bool getButtonPressed(Button btn);
 //    static bool getMouseButtonPressed(MouseButton mouseBtn);
 

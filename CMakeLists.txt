@@ -19,12 +19,24 @@ endif ()
 # OpenGL
 find_package(OpenGL REQUIRED)
 
+# FMOD
+set(FMOD_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/libs/fmod/inc")
+set(FMOD_LIBRARY
+#        "${CMAKE_SOURCE_DIR}/libs/fmod/lib/x86/fmod_vc.lib" # for production use
+        "${CMAKE_SOURCE_DIR}/libs/fmod/lib/x86/fmodL_vc.lib" # for debug use
+)
+file(COPY
+#        "${CMAKE_SOURCE_DIR}/libs/fmod/lib/x86/fmod.dll" # for production use
+        "${CMAKE_SOURCE_DIR}/libs/fmod/lib/x86/fmodL.dll" # for debug use
+        DESTINATION ${CMAKE_BINARY_DIR})
+
 # Include directories
 include_directories(
         ${SDL2_INCLUDE_DIRS}
         ${GLEW_INCLUDE_DIRS}
         #        ${SDL2TTF_INCLUDE_DIR}
         libs
+        ${FMOD_INCLUDE_DIR}
 )
 
 message("\nIncludes:")
@@ -54,6 +66,7 @@ message(SDL2_LIBRARY: ${SDL2_LIBRARIES})
 message(GLEW_LIBRARY: ${GLEW_LIBRARIES})
 #message(SDL2TTF_LIBRARY: ${SDL2TTF_LIBRARY})
 message(OPENGL_LIBRARIES: ${OPENGL_LIBRARIES})
+message(FMOD: ${FMOD_LIBRARY})
 message("")
 
 # Copy asset folder using a python script
@@ -65,4 +78,6 @@ target_link_libraries(${PROJECT_NAME}
         ${SDL2_LIBRARIES}
         ${GLEW_LIBRARIES}
         #        ${SDL2TTF_LIBRARY}
-        ${OPENGL_LIBRARIES})
+        ${OPENGL_LIBRARIES}
+        ${FMOD_LIBRARY}
+        )

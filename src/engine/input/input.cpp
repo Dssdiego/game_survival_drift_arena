@@ -31,3 +31,7 @@ void Input::vibrateJoystick(float force, int seconds) {
         SDL_HapticRumblePlay(mHaptic, force, seconds * 1000);
     }
 }
+
+bool Input::getKeyPressed(Key key) {
+    return false;
+}
