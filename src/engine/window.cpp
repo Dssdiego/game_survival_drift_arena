@@ -136,6 +136,34 @@ void Window::pollEvents() {
             glViewport(0, 0, mSDLEvent.window.data1, mSDLEvent.window.data2);
         }
 
+        if (mSDLEvent.type == SDL_KEYDOWN || mSDLEvent.type == SDL_KEYUP) {
+            // TODO: Keyboard key press/release input event
+        }
+
+        if (mSDLEvent.type == SDL_JOYBUTTONDOWN) {
+            switch (mSDLEvent.jbutton.button) {
+                case 0:
+                    std::cout << 0 << std::endl;
+                    break;
+                case 1:
+                    std::cout << 1 << std::endl;
+                    break;
+                case 2:
+                    std::cout << 2 << std::endl;
+                    break;
+                case 3:
+                    std::cout << 3 << std::endl;
+                    break;
+                case 4:
+                    std::cout << 4 << std::endl;
+                    break;
+                case 5:
+                    std::cout << 5 << std::endl;
+                    break;
+            }
+//            std::cout << mSDLEvent.jbutton.button << std::endl;
+        }
+
         //if (mSDLEvent.type == SDL_WINDOWEVENT && mSDLEvent.window.event == SDL_WINDOWEVENT_ENTER) {
         //    Log::info("Mouse inside window");
         //}

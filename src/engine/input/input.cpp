@@ -6,10 +6,16 @@
 #include "../logging/log.h"
 
 void Input::init() {
+    // Init game controller (a.k.a joystick)
+    mController = SDL_GameControllerOpen(0);
+    if (mController == NULL) {
+        Log::warn("Unable to find a game controller (joystick) device");
+    }
+
     // Get controller haptic device
     mHaptic = SDL_HapticOpen(0);
     if (mHaptic == NULL) {
-        Log::warn("No joystick connected / No haptic support");
+        Log::warn("No haptic support");
     } else {
         // Initialize rumble module
         if (SDL_HapticRumbleInit(mHaptic) < 0) {
@@ -20,10 +26,10 @@ void Input::init() {
 
 void Input::dispose() {
     SDL_HapticClose(mHaptic);
-    SDL_JoystickClose(mJoystick);
+    SDL_GameControllerClose(mController);
 
     mHaptic = nullptr;
-    mJoystick = nullptr;
+    mController = nullptr;
 }
 
 void Input::vibrateJoystick(float force, int seconds) {

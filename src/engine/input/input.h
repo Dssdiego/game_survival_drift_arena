@@ -7,7 +7,7 @@
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
 #include <SDL_haptic.h>
-#include <SDL_joystick.h>
+#include <SDL_gamecontroller.h>
 
 // These are generally copied from the SDL2 Scancode Keys,
 // which are in turn based on the USB standards:
@@ -206,7 +206,7 @@ public:
 
     static int mouseX, mouseY;
 private:
-    inline static SDL_Joystick *mJoystick = nullptr;
+    inline static SDL_GameController *mController = nullptr;
     inline static SDL_Haptic *mHaptic = nullptr;
 };
 
