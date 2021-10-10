@@ -19,6 +19,9 @@ endif ()
 # OpenGL
 find_package(OpenGL REQUIRED)
 
+# ImGUI
+find_package(imgui CONFIG REQUIRED)
+
 # FMOD
 set(FMOD_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/libs/fmod/inc")
 set(FMOD_LIBRARY
@@ -80,4 +83,5 @@ target_link_libraries(${PROJECT_NAME}
         #        ${SDL2TTF_LIBRARY}
         ${OPENGL_LIBRARIES}
         ${FMOD_LIBRARY}
+        imgui::imgui
         )

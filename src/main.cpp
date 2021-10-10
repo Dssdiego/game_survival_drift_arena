@@ -15,6 +15,9 @@ int main()
     Log::initLogFile();
     Log::info("Game engine starting...");
 
+    // Debug UI
+    DebugMenu::init();
+
     // Window creation
     Window window = Window("Pong", {800,600});
 
@@ -37,12 +40,14 @@ int main()
 //        game.update();
 //        game.draw();
         quad.draw();
+        DebugMenu::draw();
         window.draw();
     }
 
     // Cleanup
     Input::dispose();
     AudioSystem::dispose();
+    DebugMenu::dispose();
 //    game.cleanUp();
     quad.cleanUp();
     window.cleanUp();

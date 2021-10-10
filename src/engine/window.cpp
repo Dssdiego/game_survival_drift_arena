@@ -18,6 +18,7 @@
 #endif
 
 #include "input/input.h"
+#include "debug/debugmenu.h"
 
 struct WindowIcon {
     int format;
@@ -93,6 +94,9 @@ Window::Window(std::string title, Rect size) {
     // Make current context
     SDL_GL_MakeCurrent(mWindow, mContext);
 
+    // Bind current context to IMGUI
+    DebugMenu::bindRenderer(mWindow, mContext);
+
     // Creates the engine icon from the default texture
     createEngineIcon();
 
@@ -116,6 +120,14 @@ bool Window::shouldClose() {
 
 void Window::pollEvents() {
     while (SDL_PollEvent(&mSDLEvent) != 0) {
+        // Debug UI (IMGUI)
+        DebugMenu::processEvent(&mSDLEvent);
+
+        // F12 to show debug menu
+        if (mSDLEvent.type == SDL_KEYDOWN && mSDLEvent.key.keysym.scancode == SDL_SCANCODE_F12) {
+            DebugMenu::toggleMenu();
+        }
+
         // If the user clicked on the "close" button of the window
         if (mSDLEvent.type == SDL_QUIT) {
             mShouldClose = true;

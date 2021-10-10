@@ -9,3 +9,4 @@
 #include "engine/window.h"
 #include "engine/input/input.h"
 #include "engine/sound/audiosystem.h"
+#include "engine/debug/debugmenu.h"
