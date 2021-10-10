@@ -44,14 +44,26 @@ void DebugMenu::draw() {
     if (mShowMenu)
     {
         ImGui::Begin("Debug Menu");
-        ImGui::BeginTabBar("");
-        ImGui::BeginTabItem("Marketing");
-        if (ImGui::Button("Take screenshot"))
+        ImGui::Separator();
+        if (ImGui::BeginTabBar("#tabs"))
         {
-            takeScreenshot();
+            if (ImGui::BeginTabItem("Marketing"))
+            {
+                if (ImGui::Button("Take screenshot"))
+                {
+                    takeScreenshot();
+                }
+                ImGui::EndTabItem();
+            }
+
+            if (ImGui::BeginTabItem("Options"))
+            {
+                ImGui::EndTabItem();
+            }
+
+            ImGui::EndTabBar();
         }
-        ImGui::EndTabItem();
-        ImGui::EndTabBar();
+
         ImGui::End();
     }
 
