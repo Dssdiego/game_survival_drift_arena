@@ -5,6 +5,7 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 
 #include "debugmenu.h"
+#include "../scenes/scenesystem.h"
 
 void DebugMenu::init() {
     IMGUI_CHECKVERSION();
@@ -43,10 +44,36 @@ void DebugMenu::draw() {
     // render the GUI
     if (mShowMenu)
     {
+//        ImGui::ShowDemoWindow();
+
         ImGui::Begin("Debug Menu");
         ImGui::Separator();
         if (ImGui::BeginTabBar("#tabs"))
         {
+            if (ImGui::BeginTabItem("Scenes"))
+            {
+                if (ImGui::Button("Previous Scene"))
+                {
+                    SceneSystem::previousScene();
+                }
+
+                ImGui::SameLine();
+                if (ImGui::Button("Next Scene"))
+                {
+                    SceneSystem::nextScene();
+                }
+
+//                auto scenes = SceneSystem::getScenes();
+//                std::map<int, Scene>::iterator it = scenes.begin();
+//
+//                for (std::pair<int, Scene> element : scenes) {
+//
+//                }
+
+                ImGui::EndTabItem();
+            }
+
+
             if (ImGui::BeginTabItem("Marketing"))
             {
                 if (ImGui::Button("Take screenshot"))
