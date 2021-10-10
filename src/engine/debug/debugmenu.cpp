@@ -2,8 +2,9 @@
 // Created by dss-d on 09/10/2021.
 //
 
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+
 #include "debugmenu.h"
-#include "../logging/log.h"
 
 void DebugMenu::init() {
     IMGUI_CHECKVERSION();
@@ -43,7 +44,14 @@ void DebugMenu::draw() {
     if (mShowMenu)
     {
         ImGui::Begin("Debug Menu");
-        ImGui::Button("Hello!");
+        ImGui::BeginTabBar("");
+        ImGui::BeginTabItem("Marketing");
+        if (ImGui::Button("Take screenshot"))
+        {
+            takeScreenshot();
+        }
+        ImGui::EndTabItem();
+        ImGui::EndTabBar();
         ImGui::End();
     }
 
@@ -58,4 +66,31 @@ void DebugMenu::dispose() {
     ImGui::DestroyContext(mContext);
 
     mContext = nullptr;
+}
+
+void DebugMenu::takeScreenshot() {
+    int width = 800, height = 600; // TODO: Get these values from the window, directly
+    int comp = 4;
+    auto* pixels = malloc(width * height * comp);
+    glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+
+    time_t theTime = time(nullptr);
+    struct tm *curTime = localtime(&theTime);
+    int day = curTime->tm_mday;
+    int month = curTime->tm_mon + 1;
+    int year = curTime->tm_year + 1900;
+    int hour = curTime->tm_hour;
+    int min = curTime->tm_min;
+    int sec = curTime->tm_sec;
+
+    std::string screenFileName = "screenshot_" + std::to_string(year) + "_" +
+            std::to_string(month) + "_" +
+            std::to_string(day) + "_" +
+            std::to_string(hour) + std::to_string(min) + std::to_string(sec) +
+            ".png";
+
+    // Flips the framebuffer vertically
+    stbi_flip_vertically_on_write(true);
+    stbi_write_png(screenFileName.c_str(), width, height, comp, pixels, width * comp);
+    Log::info("Screenshot saved successfully!");
 }
