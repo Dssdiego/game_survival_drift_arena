@@ -1,10 +1,8 @@
-////
-//// Created by dss-d on 05/10/2021.
-////
 //
-//#include "entity.h"
+// Created by dss-d on 05/10/2021.
 //
-//Entity::Entity(Vec2 position, Texture texture) : position({0.0f,0.0f}) {
-//}
-//
-//Entity::Entity() { }
+
+#include "entity.h"
+
+Entity::Entity() : mPosition({0.0f, 0.0f}) { }
+Entity::Entity(Vec2 position): mPosition(position) { }

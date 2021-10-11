@@ -52,6 +52,8 @@ void DebugMenu::draw() {
         {
             if (ImGui::BeginTabItem("Scenes"))
             {
+                auto scenes = SceneSystem::getScenes();
+
                 if (ImGui::Button("Previous Scene"))
                 {
                     SceneSystem::previousScene();
@@ -63,16 +65,9 @@ void DebugMenu::draw() {
                     SceneSystem::nextScene();
                 }
 
-//                auto scenes = SceneSystem::getScenes();
-//                std::map<int, Scene>::iterator it = scenes.begin();
-//
-//                for (std::pair<int, Scene> element : scenes) {
-//
-//                }
 
                 ImGui::EndTabItem();
             }
-
 
             if (ImGui::BeginTabItem("Marketing"))
             {

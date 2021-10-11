@@ -1,6 +1,6 @@
 # Loki Engine
 
-![engine_icon](assets/engine_icon.png)
+![engine_icon](assets/sprites/engine_icon.png)
 
 Simple 2D Game Engine made from scratch with C++, SDL and FMOD
 

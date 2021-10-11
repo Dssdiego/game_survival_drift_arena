@@ -8,7 +8,9 @@
 //
 //#include <SDL_opengl.h>
 //#include <stb_image.h>
-//#include "texture.h"
+#include "texture.h"
+Texture::Texture() {}
+
 //
 //void Texture::load(const std::string& imagePath)
 //{

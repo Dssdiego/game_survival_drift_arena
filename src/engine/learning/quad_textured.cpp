@@ -14,7 +14,7 @@
 QuadTextured::QuadTextured()
 {
     // Image configuration
-    std::string imgName = "assets/engine_icon.png";
+    std::string imgName = "assets/sprites/engine_icon.png";
     int imgWidth, imgHeight, imgChannels;
 
     // REVIEW: Could be the other way around. I have to check

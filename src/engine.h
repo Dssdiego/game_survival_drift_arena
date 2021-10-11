@@ -8,5 +8,6 @@
 #include "engine/logging/log.h"
 #include "engine/window.h"
 #include "engine/input/input.h"
-#include "engine/sound/audiosystem.h"
+#include "engine/audio/audiosystem.h"
 #include "engine/debug/debugmenu.h"
+#include "engine/assets/assetsystem.h"

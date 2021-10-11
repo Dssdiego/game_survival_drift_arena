@@ -222,11 +222,13 @@ void Window::clear(SDL_Color color) {
 void Window::createEngineIcon() {
     WindowIcon icon;
     icon.format = STBI_rgb_alpha;
-    icon.data = stbi_load("assets/engine_icon.png", &icon.width, &icon.height, &icon.nChannels, icon.format);
+    icon.data = stbi_load("assets/sprites/engine_icon.png", &icon.width, &icon.height, &icon.nChannels, icon.format);
 
     // Check for errors
     if(icon.data == NULL)
-        Log::error("Error loading game icon!");
+        Log::error("Error loading engine icon!");
+
+    // TODO: If has game icon, use it instead!
 
     // Set up the pixel format color masks for RGB(A) byte arrays.
     // Only STBI_rgb (3) and STBI_rgb_alpha (4) are supported here!
@@ -256,7 +258,7 @@ void Window::createEngineIcon() {
 
     // Check for errors
     if (surface == NULL) {
-        Log::error("Error loading game icon! (surface creation)");
+        Log::error("Error loading engine icon! (surface creation)");
         stbi_image_free(icon.data);
     }
 
