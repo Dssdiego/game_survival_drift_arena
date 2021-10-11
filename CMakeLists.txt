@@ -24,14 +24,14 @@ find_package(imgui CONFIG REQUIRED)
 
 # FMOD
 if (WIN32)
-    set(FMOD_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/libs/fmod/inc")
+    set(FMOD_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/libs/fmod/windows/inc")
     set(FMOD_LIBRARY
-    #        "${CMAKE_SOURCE_DIR}/libs/fmod/lib/x86/fmod_vc.lib" # for production use
-            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/x86/fmodL_vc.lib" # for debug use
+    #        "${CMAKE_SOURCE_DIR}/libs/fmod/windows/lib/x86/fmod_vc.lib" # for production use
+            "${CMAKE_SOURCE_DIR}/libs/fmod/windows/lib/x86/fmodL_vc.lib" # for debug use
     )
     file(COPY
-    #        "${CMAKE_SOURCE_DIR}/libs/fmod/lib/x86/fmod.dll" # for production use
-            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/x86/fmodL.dll" # for debug use
+    #        "${CMAKE_SOURCE_DIR}/libs/fmod/windows/lib/x86/fmod.dll" # for production use
+            "${CMAKE_SOURCE_DIR}/libs/fmod/windows/lib/x86/fmodL.dll" # for debug use
             DESTINATION ${CMAKE_BINARY_DIR})
 endif()
 if (APPLE)
