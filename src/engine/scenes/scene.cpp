@@ -13,3 +13,4 @@ void Scene::dispose() {
 void Scene::draw() {
     std::cout << "Drawing the contents of the scene " << mName << std::endl;
 }
+
