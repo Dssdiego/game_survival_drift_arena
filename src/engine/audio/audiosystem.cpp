@@ -13,8 +13,8 @@ void AudioSystem::init() {
         Log::info("FMOD initialized successfully");
 
         // Play test sound on game engine init
-        createSound();
-        playSound();
+//        createSound();
+//        playSound();
     } else
     {
         Log::error("Error initializing FMOD!");
