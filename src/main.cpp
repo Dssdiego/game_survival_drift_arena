@@ -15,6 +15,9 @@ int main()
     Log::initLogFile();
     Log::info("Game engine starting...");
 
+    // Asset System
+    AssetSystem::init();
+
     // Debug UI
     DebugMenu::init();
 
@@ -45,6 +48,7 @@ int main()
     }
 
     // Cleanup
+    AssetSystem::dispose();
     Input::dispose();
     AudioSystem::dispose();
     DebugMenu::dispose();
